@@ -5,6 +5,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "preview:es": "yarn build && npx servor ./dist ./preview-es.html --browse",
+    "preview:umd": "yarn build && npx servor ./dist ./preview-umd.html --browse",
     "help": "vite preview --help",
     "test": "jest",
     "test:watch": "jest --watchAll",
@@ -22,6 +24,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",
+    "@babel/plugin-transform-runtime": "^7.16.7",
     "@babel/preset-env": "^7.16.7",
     "@vitejs/plugin-vue": "^2.0.1",
     "@vue/test-utils": "^2.0.0-rc.18",
@@ -84,7 +87,7 @@
     "overrides": [
       {
         "files": [
-          "**/*.test.js"
+          "**/*.spec.js"
         ],
         "env": {
           "jest": true
@@ -107,23 +110,22 @@
   },
   "babel": {
     "presets": [
-      [
-        "@babel/preset-env",
-        {}
-      ]
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
     ]
   },
   "jest": {
     "testEnvironment": "jsdom",
     "transform": {
-      "^.+\\.vue$": "@vue/vue3-jest",
-      "^.+\\.js$": "babel-jest"
+      ".*\\.(js)$": "babel-jest",
+      ".*\\.(vue)$": "@vue/vue3-jest"
     },
     "moduleFileExtensions": [
-      "vue",
       "js",
       "json",
-      "node"
+      "vue"
     ]
   },
   "browserslist": [
@@ -140,6 +142,7 @@
       "browserslist",
       "importmap",
       "linebreak",
+      "servor",
       "singlefile",
       "singleline",
       "stylelint",
