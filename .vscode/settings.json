@@ -21,6 +21,5 @@
     "source.fixAll.stylelint": true
   },
   "css.validate": false,
-  "scss.validate": false,
-  "liveServer.settings.root": "/dist/"
+  "scss.validate": false
 }
